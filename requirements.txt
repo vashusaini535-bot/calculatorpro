@@ -1,13 +1,31 @@
-# MathMaster Pro - requirements
-#
-# Python 3.8 or newer is required.
-#
-# This app uses ONLY the Python standard library
-# (tkinter, math, re, statistics, fractions), so there are
-# no third-party packages to install with pip.
-#
-# tkinter ships with Python on Windows and macOS.
-# On Linux, if you get "No module named tkinter", install it with:
-#   Debian/Ubuntu : sudo apt install python3-tk
-#   Fedora        : sudo dnf install python3-tkinter
-#   Arch          : sudo pacman -S tk
+[app]
+
+# (str) Title of your application
+title = MathMaster Pro
+
+# (str) Package name
+package.name = mathmasterpro
+
+# (str) Package domain (needed for android packaging)
+package.domain = org.mathmaster
+
+# (str) Source files to include
+source.include_exts = py,png,jpg,kv,atlas
+
+# (list) Application requirements
+# Standard library features only
+requirements = python3
+
+# (str) Supported orientation (landscape, portrait or all)
+orientation = portrait
+
+# (list) Permissions
+android.permissions = INTERNET
+
+[buildozer]
+
+# (int) Log level (0 = error, 1 = info, 2 = debug)
+log_level = 2
+
+# (int) Display warning if buildozer is run as root
+warn_on_root = 1

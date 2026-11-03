@@ -1,31 +1,24 @@
-[app]
+name: CI
 
-# (str) Title of your application
-title = MathMaster Pro
+on:
+  push:
+    branches: [ main ]
 
-# (str) Package name
-package.name = mathmasterpro
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# (str) Package domain (needed for android packaging)
-package.domain = org.mathmaster
+    steps:
+    - uses: actions/checkout@v4
 
-# (str) Source files to include
-source.include_exts = py,png,jpg,kv,atlas
+    - name: Build with Buildozer
+      uses: kivy/buildozer-action@v1
+      id: buildozer
+      with:
+        command: buildozer -v android debug
 
-# (list) Application requirements
-# Standard library features only
-requirements = python3
-
-# (str) Supported orientation (landscape, portrait or all)
-orientation = portrait
-
-# (list) Permissions
-android.permissions = INTERNET
-
-[buildozer]
-
-# (int) Log level (0 = error, 1 = info, 2 = debug)
-log_level = 2
-
-# (int) Display warning if buildozer is run as root
-warn_on_root = 1
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: package
+        path: bin/*.apk
